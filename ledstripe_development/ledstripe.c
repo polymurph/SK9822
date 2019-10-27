@@ -12,8 +12,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-static fptr_uint8_t spi_tx = NULL_POINTER;
-static led_color_t led_strip_buff[N_LED];
+static fptr_U8_t spi_tx = NULL_POINTER;
+static led_color_t led_strip_buff[N_LED];	//!< LED buffer init	
 
 /*
  ****************************************************************
@@ -23,12 +23,12 @@ static led_color_t led_strip_buff[N_LED];
  @return -
  ****************************************************************
  */
-_start_sequence()
+void _start_sequence()
 {
-	hal_SPI_trx(0x00);
-	hal_SPI_trx(0x00);
-	hal_SPI_trx(0x00);
-	hal_SPI_trx(0x00);
+	spi_tx(0x00);
+	spi_tx(0x00);
+	spi_tx(0x00);
+	spi_tx(0x00);
 }
 
 /*
@@ -39,12 +39,12 @@ _start_sequence()
  @return -
  ****************************************************************
  */
-_stop_sequence()
+void _stop_sequence()
 {
-	hal_SPI_trx(0xFF);
-	hal_SPI_trx(0xFF);
-	hal_SPI_trx(0xFF);
-	hal_SPI_trx(0xFF);
+	spi_tx(0xFF);
+	spi_tx(0xFF);
+	spi_tx(0xFF);
+	spi_tx(0xFF);
 }
 
 /*
@@ -71,7 +71,7 @@ void _writeLEDs()
  ****************************************************************
  @brief  shifts all LEDs once in the desired direction determined
 		 by dir.
-		 Data shiftet over border is lost!
+		 Data shifted over border is lost!
  @param  dir true: right , false: left
  @bug
  @return -
@@ -80,8 +80,6 @@ void _writeLEDs()
 void _shift_all_once(bool dir)
 {
 	uint8_t i = 0;
-	uint8_t a = 0;
-	led_color_t buff;
 	led_color_t zero={
 		.brightness = 0,
 		.red = 0,
@@ -89,30 +87,15 @@ void _shift_all_once(bool dir)
 		.blue = 0
 	};
 	if(dir){
-		// TODO: solve right shift buff
-		
 		for(i = (N_LED - 1); i > 0; i--){
 			led_strip_buff[i] = led_strip_buff[i-1];
 		}
 		led_strip_buff[0] = zero;
-			
- 
 	}else{
-		//buff = led_strip_buff[0];
-		
 		for(i = 0; i < (N_LED - 1); i++){
 			led_strip_buff[i] = led_strip_buff[i+1];	
 		}
 		led_strip_buff[N_LED - 1] = zero;
-		
-		#if 0
-		for(i = 1 ; i < (N_LED - 1); i++){
-			led_strip_buff[i - 1] = led_strip_buff[i];	
-		}
-		#endif
-		
-		//led_strip_buff[N_LED - 1] = zero;
-		//led_strip_buff[0] = zero;
 	}
 }
 
@@ -129,12 +112,6 @@ void _ringshift_all_once(bool dir)
 {
 	uint8_t i = 0;
 	led_color_t buff;
-	led_color_t zero={
-		.brightness = 0,
-		.red = 0,
-		.green = 0,
-		.blue = 0
-	};
 	if(dir){
 		buff = led_strip_buff[N_LED - 1];
 		for(i = (N_LED - 1); i > 0; i--){
@@ -163,7 +140,7 @@ void _ringshift_all_once(bool dir)
  @return -
  ****************************************************************
  */
-void ledstrip_init(fptr_t spi_transmit)
+void ledstrip_init(fptr_U8_t spi_transmit)
 {
 	spi_tx = spi_transmit;
 }
@@ -277,7 +254,6 @@ void ledstip_pending_set_LED_rgb(uint8_t led_n, uint8_t level, uint8_t r, uint8_
 	led_strip_buff[led_n].blue = b;
 	led_strip_buff[led_n].red = r;
 	led_strip_buff[led_n].green = g;
-	
 }
 
 /*

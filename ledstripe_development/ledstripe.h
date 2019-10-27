@@ -4,9 +4,9 @@
  ****************************************************************
  @brief  driver for the SK9822 LED-Strip
  ****************************************************************
- SPI: MSB first
- MSB furthest left
- LSB furthests right
+ @note   SPI: MSB first
+		 MSB furthest left
+		 LSB furthest right
  ****************************************************************
  @author  Edwin Koch
  @version 1.0
@@ -20,22 +20,30 @@
 #include <stdbool.h>
 
 //defines
-#define NULL_POINTER 0
-#define N_LED 26
+#define NULL_POINTER 0	//!< define the NULL pointer for your target device
+#define N_LED 26		//!< define the number of LEDs on the strip
 
+typedef void (*fptr_U8_t)(uint8_t);  //!< function pointer with uint8_t parameter
 
-
-typedef void (*fptr_t)(void);
-typedef void (*fptr_uint8_t)(uint8_t);
-
+/** @struct led_color_t
+   *
+   *  @var led_color_t::brightness
+   *    color brightness uint8_t range 0 - 31 (0x1F)
+   *  @var led_color_t::red
+   *    red color uint8_t
+   *  @var led_color_t::green
+   *    green color uint8_t
+   *  @var led_color_t::blue
+   *    blue color uint8_t
+   */
 typedef struct{
-	uint8_t brightness;
+	uint8_t brightness;	
 	uint8_t red;
 	uint8_t green;
 	uint8_t blue;
 }led_color_t;
 
-void ledstrip_init(fptr_t spi_transmit);
+void ledstrip_init(fptr_U8_t spi_transmit);
 
 void ledstrip_set_LED_color(uint8_t n_led,led_color_t color);
 
