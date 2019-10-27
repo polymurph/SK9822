@@ -1,0 +1,918 @@
+
+ledstripe_development.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001a  00800100  0000076a  000007fe  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000076a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000006a  0080011a  0080011a  00000818  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000818  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000848  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000160  00000000  00000000  00000888  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000016c9  00000000  00000000  000009e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000a9b  00000000  00000000  000020b1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000a49  00000000  00000000  00002b4c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000320  00000000  00000000  00003598  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000083e  00000000  00000000  000038b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000862  00000000  00000000  000040f6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000130  00000000  00000000  00004958  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 b0 00 	jmp	0x160	; 0x160 <__vector_17>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ea e6       	ldi	r30, 0x6A	; 106
+  7c:	f7 e0       	ldi	r31, 0x07	; 7
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 31       	cpi	r26, 0x1A	; 26
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	aa e1       	ldi	r26, 0x1A	; 26
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a4 38       	cpi	r26, 0x84	; 132
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 de 01 	call	0x3bc	; 0x3bc <main>
+  9e:	0c 94 b3 03 	jmp	0x766	; 0x766 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <dummy>:
+}
+
+void hal_SPI_unregisterTransferCompletionCallback()
+{
+	callback = dummy;
+	SPCR &= ~(1 << SPIE);
+  a6:	08 95       	ret
+
+000000a8 <hal_SPI_enableModule>:
+  a8:	e4 e6       	ldi	r30, 0x64	; 100
+  aa:	f0 e0       	ldi	r31, 0x00	; 0
+  ac:	80 81       	ld	r24, Z
+  ae:	8b 7f       	andi	r24, 0xFB	; 251
+  b0:	80 83       	st	Z, r24
+  b2:	08 95       	ret
+
+000000b4 <hal_SPI_enable_TRX>:
+  b4:	8c b5       	in	r24, 0x2c	; 44
+  b6:	80 64       	ori	r24, 0x40	; 64
+  b8:	8c bd       	out	0x2c, r24	; 44
+  ba:	08 95       	ret
+
+000000bc <hal_SPI_dataDirectionOrder>:
+  bc:	9c b5       	in	r25, 0x2c	; 44
+  be:	9f 7d       	andi	r25, 0xDF	; 223
+  c0:	9c bd       	out	0x2c, r25	; 44
+  c2:	2c b5       	in	r18, 0x2c	; 44
+  c4:	30 e2       	ldi	r19, 0x20	; 32
+  c6:	83 9f       	mul	r24, r19
+  c8:	c0 01       	movw	r24, r0
+  ca:	11 24       	eor	r1, r1
+  cc:	82 2b       	or	r24, r18
+  ce:	8c bd       	out	0x2c, r24	; 44
+  d0:	08 95       	ret
+
+000000d2 <hal_SPI_setMode>:
+  d2:	9c b5       	in	r25, 0x2c	; 44
+  d4:	9f 7e       	andi	r25, 0xEF	; 239
+  d6:	9c bd       	out	0x2c, r25	; 44
+  d8:	9c b5       	in	r25, 0x2c	; 44
+  da:	40 e1       	ldi	r20, 0x10	; 16
+  dc:	84 9f       	mul	r24, r20
+  de:	90 01       	movw	r18, r0
+  e0:	11 24       	eor	r1, r1
+  e2:	29 2b       	or	r18, r25
+  e4:	2c bd       	out	0x2c, r18	; 44
+  e6:	81 30       	cpi	r24, 0x01	; 1
+  e8:	31 f4       	brne	.+12     	; 0xf6 <hal_SPI_setMode+0x24>
+  ea:	84 b1       	in	r24, 0x04	; 4
+  ec:	8c 62       	ori	r24, 0x2C	; 44
+  ee:	84 b9       	out	0x04, r24	; 4
+  f0:	24 98       	cbi	0x04, 4	; 4
+  f2:	2a 98       	cbi	0x05, 2	; 5
+  f4:	08 95       	ret
+  f6:	81 11       	cpse	r24, r1
+  f8:	04 c0       	rjmp	.+8      	; 0x102 <hal_SPI_setMode+0x30>
+  fa:	84 b1       	in	r24, 0x04	; 4
+  fc:	83 7d       	andi	r24, 0xD3	; 211
+  fe:	84 b9       	out	0x04, r24	; 4
+ 100:	24 9a       	sbi	0x04, 4	; 4
+ 102:	08 95       	ret
+
+00000104 <hal_SPI_setClockPolarity>:
+ 104:	9c b5       	in	r25, 0x2c	; 44
+ 106:	97 7f       	andi	r25, 0xF7	; 247
+ 108:	9c bd       	out	0x2c, r25	; 44
+ 10a:	2c b5       	in	r18, 0x2c	; 44
+ 10c:	38 e0       	ldi	r19, 0x08	; 8
+ 10e:	83 9f       	mul	r24, r19
+ 110:	c0 01       	movw	r24, r0
+ 112:	11 24       	eor	r1, r1
+ 114:	82 2b       	or	r24, r18
+ 116:	8c bd       	out	0x2c, r24	; 44
+ 118:	08 95       	ret
+
+0000011a <hal_SPI_setClockPhase>:
+ 11a:	9c b5       	in	r25, 0x2c	; 44
+ 11c:	9b 7f       	andi	r25, 0xFB	; 251
+ 11e:	9c bd       	out	0x2c, r25	; 44
+ 120:	2c b5       	in	r18, 0x2c	; 44
+ 122:	34 e0       	ldi	r19, 0x04	; 4
+ 124:	83 9f       	mul	r24, r19
+ 126:	c0 01       	movw	r24, r0
+ 128:	11 24       	eor	r1, r1
+ 12a:	82 2b       	or	r24, r18
+ 12c:	8c bd       	out	0x2c, r24	; 44
+ 12e:	08 95       	ret
+
+00000130 <hal_SPI_setClockRate>:
+ 130:	9c b5       	in	r25, 0x2c	; 44
+ 132:	9c 7f       	andi	r25, 0xFC	; 252
+ 134:	9c bd       	out	0x2c, r25	; 44
+ 136:	9c b5       	in	r25, 0x2c	; 44
+ 138:	28 2f       	mov	r18, r24
+ 13a:	23 70       	andi	r18, 0x03	; 3
+ 13c:	92 2b       	or	r25, r18
+ 13e:	9c bd       	out	0x2c, r25	; 44
+ 140:	9d b5       	in	r25, 0x2d	; 45
+ 142:	86 95       	lsr	r24
+ 144:	86 95       	lsr	r24
+ 146:	89 2b       	or	r24, r25
+ 148:	8d bd       	out	0x2d, r24	; 45
+ 14a:	08 95       	ret
+
+0000014c <hal_SPI_trx>:
+ 14c:	8e bd       	out	0x2e, r24	; 46
+ 14e:	0d b4       	in	r0, 0x2d	; 45
+ 150:	07 fe       	sbrs	r0, 7
+ 152:	fd cf       	rjmp	.-6      	; 0x14e <hal_SPI_trx+0x2>
+ 154:	8e b5       	in	r24, 0x2e	; 46
+ 156:	08 95       	ret
+
+00000158 <hal_SPI_dissableInterrupt>:
+ 158:	8c b5       	in	r24, 0x2c	; 44
+ 15a:	8f 77       	andi	r24, 0x7F	; 127
+ 15c:	8c bd       	out	0x2c, r24	; 44
+ 15e:	08 95       	ret
+
+00000160 <__vector_17>:
+}
+
+ISR(SPI_STC_vect)
+{
+ 160:	1f 92       	push	r1
+ 162:	0f 92       	push	r0
+ 164:	0f b6       	in	r0, 0x3f	; 63
+ 166:	0f 92       	push	r0
+ 168:	11 24       	eor	r1, r1
+ 16a:	2f 93       	push	r18
+ 16c:	3f 93       	push	r19
+ 16e:	4f 93       	push	r20
+ 170:	5f 93       	push	r21
+ 172:	6f 93       	push	r22
+ 174:	7f 93       	push	r23
+ 176:	8f 93       	push	r24
+ 178:	9f 93       	push	r25
+ 17a:	af 93       	push	r26
+ 17c:	bf 93       	push	r27
+ 17e:	ef 93       	push	r30
+ 180:	ff 93       	push	r31
+	callback();
+ 182:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <__data_start>
+ 186:	f0 91 01 01 	lds	r31, 0x0101	; 0x800101 <__data_start+0x1>
+ 18a:	09 95       	icall
+ 18c:	ff 91       	pop	r31
+ 18e:	ef 91       	pop	r30
+ 190:	bf 91       	pop	r27
+ 192:	af 91       	pop	r26
+ 194:	9f 91       	pop	r25
+ 196:	8f 91       	pop	r24
+ 198:	7f 91       	pop	r23
+ 19a:	6f 91       	pop	r22
+ 19c:	5f 91       	pop	r21
+ 19e:	4f 91       	pop	r20
+ 1a0:	3f 91       	pop	r19
+ 1a2:	2f 91       	pop	r18
+ 1a4:	0f 90       	pop	r0
+ 1a6:	0f be       	out	0x3f, r0	; 63
+ 1a8:	0f 90       	pop	r0
+ 1aa:	1f 90       	pop	r1
+ 1ac:	18 95       	reti
+
+000001ae <_start_sequence>:
+void ledstrip_shift_all(bool dir,uint8_t n_position)
+{
+	uint8_t i = 0;
+	for(i = 0; i<n_position;i++)_shift_all_once(dir);
+	_writeLEDs();
+}
+ 1ae:	80 e0       	ldi	r24, 0x00	; 0
+ 1b0:	90 e0       	ldi	r25, 0x00	; 0
+ 1b2:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1b6:	80 e0       	ldi	r24, 0x00	; 0
+ 1b8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ba:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1be:	80 e0       	ldi	r24, 0x00	; 0
+ 1c0:	90 e0       	ldi	r25, 0x00	; 0
+ 1c2:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1c6:	80 e0       	ldi	r24, 0x00	; 0
+ 1c8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ca:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1ce:	08 95       	ret
+
+000001d0 <_stop_sequence>:
+ 1d0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1d2:	90 e0       	ldi	r25, 0x00	; 0
+ 1d4:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1d8:	8f ef       	ldi	r24, 0xFF	; 255
+ 1da:	90 e0       	ldi	r25, 0x00	; 0
+ 1dc:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1e0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1e2:	90 e0       	ldi	r25, 0x00	; 0
+ 1e4:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1e8:	8f ef       	ldi	r24, 0xFF	; 255
+ 1ea:	90 e0       	ldi	r25, 0x00	; 0
+ 1ec:	0e 94 a6 00 	call	0x14c	; 0x14c <hal_SPI_trx>
+ 1f0:	08 95       	ret
+
+000001f2 <_writeLEDs>:
+ 1f2:	0f 93       	push	r16
+ 1f4:	1f 93       	push	r17
+ 1f6:	cf 93       	push	r28
+ 1f8:	df 93       	push	r29
+ 1fa:	0e 94 d7 00 	call	0x1ae	; 0x1ae <_start_sequence>
+ 1fe:	ca e1       	ldi	r28, 0x1A	; 26
+ 200:	d1 e0       	ldi	r29, 0x01	; 1
+ 202:	02 e8       	ldi	r16, 0x82	; 130
+ 204:	11 e0       	ldi	r17, 0x01	; 1
+ 206:	88 81       	ld	r24, Y
+ 208:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 20c:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 210:	80 6e       	ori	r24, 0xE0	; 224
+ 212:	09 95       	icall
+ 214:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 218:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 21c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 21e:	09 95       	icall
+ 220:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 224:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 228:	8a 81       	ldd	r24, Y+2	; 0x02
+ 22a:	09 95       	icall
+ 22c:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 230:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 234:	89 81       	ldd	r24, Y+1	; 0x01
+ 236:	09 95       	icall
+ 238:	24 96       	adiw	r28, 0x04	; 4
+ 23a:	c0 17       	cp	r28, r16
+ 23c:	d1 07       	cpc	r29, r17
+ 23e:	19 f7       	brne	.-58     	; 0x206 <_writeLEDs+0x14>
+ 240:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <_stop_sequence>
+ 244:	df 91       	pop	r29
+ 246:	cf 91       	pop	r28
+ 248:	1f 91       	pop	r17
+ 24a:	0f 91       	pop	r16
+ 24c:	08 95       	ret
+
+0000024e <_ringshift_all_once>:
+ 24e:	88 23       	and	r24, r24
+ 250:	01 f1       	breq	.+64     	; 0x292 <_ringshift_all_once+0x44>
+ 252:	40 91 7e 01 	lds	r20, 0x017E	; 0x80017e <__data_end+0x64>
+ 256:	50 91 7f 01 	lds	r21, 0x017F	; 0x80017f <__data_end+0x65>
+ 25a:	60 91 80 01 	lds	r22, 0x0180	; 0x800180 <__data_end+0x66>
+ 25e:	70 91 81 01 	lds	r23, 0x0181	; 0x800181 <__data_end+0x67>
+ 262:	ee e7       	ldi	r30, 0x7E	; 126
+ 264:	f1 e0       	ldi	r31, 0x01	; 1
+ 266:	2a e1       	ldi	r18, 0x1A	; 26
+ 268:	31 e0       	ldi	r19, 0x01	; 1
+ 26a:	b2 91       	ld	r27, -Z
+ 26c:	a2 91       	ld	r26, -Z
+ 26e:	92 91       	ld	r25, -Z
+ 270:	82 91       	ld	r24, -Z
+ 272:	84 83       	std	Z+4, r24	; 0x04
+ 274:	95 83       	std	Z+5, r25	; 0x05
+ 276:	a6 83       	std	Z+6, r26	; 0x06
+ 278:	b7 83       	std	Z+7, r27	; 0x07
+ 27a:	e2 17       	cp	r30, r18
+ 27c:	f3 07       	cpc	r31, r19
+ 27e:	a9 f7       	brne	.-22     	; 0x26a <_ringshift_all_once+0x1c>
+ 280:	40 93 1a 01 	sts	0x011A, r20	; 0x80011a <__data_end>
+ 284:	50 93 1b 01 	sts	0x011B, r21	; 0x80011b <__data_end+0x1>
+ 288:	60 93 1c 01 	sts	0x011C, r22	; 0x80011c <__data_end+0x2>
+ 28c:	70 93 1d 01 	sts	0x011D, r23	; 0x80011d <__data_end+0x3>
+ 290:	08 95       	ret
+ 292:	40 91 1a 01 	lds	r20, 0x011A	; 0x80011a <__data_end>
+ 296:	50 91 1b 01 	lds	r21, 0x011B	; 0x80011b <__data_end+0x1>
+ 29a:	60 91 1c 01 	lds	r22, 0x011C	; 0x80011c <__data_end+0x2>
+ 29e:	70 91 1d 01 	lds	r23, 0x011D	; 0x80011d <__data_end+0x3>
+ 2a2:	ea e1       	ldi	r30, 0x1A	; 26
+ 2a4:	f1 e0       	ldi	r31, 0x01	; 1
+ 2a6:	2e e7       	ldi	r18, 0x7E	; 126
+ 2a8:	31 e0       	ldi	r19, 0x01	; 1
+ 2aa:	84 81       	ldd	r24, Z+4	; 0x04
+ 2ac:	95 81       	ldd	r25, Z+5	; 0x05
+ 2ae:	a6 81       	ldd	r26, Z+6	; 0x06
+ 2b0:	b7 81       	ldd	r27, Z+7	; 0x07
+ 2b2:	81 93       	st	Z+, r24
+ 2b4:	91 93       	st	Z+, r25
+ 2b6:	a1 93       	st	Z+, r26
+ 2b8:	b1 93       	st	Z+, r27
+ 2ba:	e2 17       	cp	r30, r18
+ 2bc:	f3 07       	cpc	r31, r19
+ 2be:	a9 f7       	brne	.-22     	; 0x2aa <_ringshift_all_once+0x5c>
+ 2c0:	40 93 7e 01 	sts	0x017E, r20	; 0x80017e <__data_end+0x64>
+ 2c4:	50 93 7f 01 	sts	0x017F, r21	; 0x80017f <__data_end+0x65>
+ 2c8:	60 93 80 01 	sts	0x0180, r22	; 0x800180 <__data_end+0x66>
+ 2cc:	70 93 81 01 	sts	0x0181, r23	; 0x800181 <__data_end+0x67>
+ 2d0:	08 95       	ret
+
+000002d2 <ledstrip_init>:
+ 2d2:	90 93 83 01 	sts	0x0183, r25	; 0x800183 <spi_tx+0x1>
+ 2d6:	80 93 82 01 	sts	0x0182, r24	; 0x800182 <spi_tx>
+ 2da:	08 95       	ret
+
+000002dc <ledstrip_set_color_all>:
+ 2dc:	cf 92       	push	r12
+ 2de:	df 92       	push	r13
+ 2e0:	ef 92       	push	r14
+ 2e2:	ff 92       	push	r15
+ 2e4:	0f 93       	push	r16
+ 2e6:	1f 93       	push	r17
+ 2e8:	cf 93       	push	r28
+ 2ea:	df 93       	push	r29
+ 2ec:	16 2f       	mov	r17, r22
+ 2ee:	c7 2e       	mov	r12, r23
+ 2f0:	d8 2e       	mov	r13, r24
+ 2f2:	09 2f       	mov	r16, r25
+ 2f4:	0e 94 d7 00 	call	0x1ae	; 0x1ae <_start_sequence>
+ 2f8:	ca e1       	ldi	r28, 0x1A	; 26
+ 2fa:	d1 e0       	ldi	r29, 0x01	; 1
+ 2fc:	0f 2e       	mov	r0, r31
+ 2fe:	f2 e8       	ldi	r31, 0x82	; 130
+ 300:	ef 2e       	mov	r14, r31
+ 302:	f1 e0       	ldi	r31, 0x01	; 1
+ 304:	ff 2e       	mov	r15, r31
+ 306:	f0 2d       	mov	r31, r0
+ 308:	18 83       	st	Y, r17
+ 30a:	c9 82       	std	Y+1, r12	; 0x01
+ 30c:	da 82       	std	Y+2, r13	; 0x02
+ 30e:	0b 83       	std	Y+3, r16	; 0x03
+ 310:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 314:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 318:	81 2f       	mov	r24, r17
+ 31a:	09 95       	icall
+ 31c:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 320:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 324:	8b 81       	ldd	r24, Y+3	; 0x03
+ 326:	09 95       	icall
+ 328:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 32c:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 330:	8a 81       	ldd	r24, Y+2	; 0x02
+ 332:	09 95       	icall
+ 334:	e0 91 82 01 	lds	r30, 0x0182	; 0x800182 <spi_tx>
+ 338:	f0 91 83 01 	lds	r31, 0x0183	; 0x800183 <spi_tx+0x1>
+ 33c:	89 81       	ldd	r24, Y+1	; 0x01
+ 33e:	09 95       	icall
+ 340:	24 96       	adiw	r28, 0x04	; 4
+ 342:	ce 15       	cp	r28, r14
+ 344:	df 05       	cpc	r29, r15
+ 346:	01 f7       	brne	.-64     	; 0x308 <ledstrip_set_color_all+0x2c>
+ 348:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <_stop_sequence>
+ 34c:	df 91       	pop	r29
+ 34e:	cf 91       	pop	r28
+ 350:	1f 91       	pop	r17
+ 352:	0f 91       	pop	r16
+ 354:	ff 90       	pop	r15
+ 356:	ef 90       	pop	r14
+ 358:	df 90       	pop	r13
+ 35a:	cf 90       	pop	r12
+ 35c:	08 95       	ret
+
+0000035e <ledstrip_set_rgb_all>:
+ 35e:	76 2f       	mov	r23, r22
+ 360:	92 2f       	mov	r25, r18
+ 362:	68 2f       	mov	r22, r24
+ 364:	60 6e       	ori	r22, 0xE0	; 224
+ 366:	84 2f       	mov	r24, r20
+ 368:	0e 94 6e 01 	call	0x2dc	; 0x2dc <ledstrip_set_color_all>
+ 36c:	08 95       	ret
+
+0000036e <ledstip_pending_set_LED_color>:
+ 36e:	8b 31       	cpi	r24, 0x1B	; 27
+ 370:	68 f4       	brcc	.+26     	; 0x38c <ledstip_pending_set_LED_color+0x1e>
+ 372:	40 6e       	ori	r20, 0xE0	; 224
+ 374:	e8 2f       	mov	r30, r24
+ 376:	f0 e0       	ldi	r31, 0x00	; 0
+ 378:	ee 0f       	add	r30, r30
+ 37a:	ff 1f       	adc	r31, r31
+ 37c:	ee 0f       	add	r30, r30
+ 37e:	ff 1f       	adc	r31, r31
+ 380:	e6 5e       	subi	r30, 0xE6	; 230
+ 382:	fe 4f       	sbci	r31, 0xFE	; 254
+ 384:	40 83       	st	Z, r20
+ 386:	51 83       	std	Z+1, r21	; 0x01
+ 388:	62 83       	std	Z+2, r22	; 0x02
+ 38a:	73 83       	std	Z+3, r23	; 0x03
+ 38c:	08 95       	ret
+
+0000038e <ledstrip_update_all>:
+ 38e:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <_writeLEDs>
+ 392:	08 95       	ret
+
+00000394 <ledstrip_ring_shift_all>:
+ @param  n_position shift n positions in direction determined by dir
+ @return -
+ ****************************************************************
+ */
+void ledstrip_ring_shift_all(bool dir,uint8_t n_position)
+{
+ 394:	1f 93       	push	r17
+ 396:	cf 93       	push	r28
+ 398:	df 93       	push	r29
+ 39a:	18 2f       	mov	r17, r24
+ 39c:	d6 2f       	mov	r29, r22
+	uint8_t i = 0;
+	for(i = 0; i<n_position;i++)_ringshift_all_once(dir);
+ 39e:	66 23       	and	r22, r22
+ 3a0:	39 f0       	breq	.+14     	; 0x3b0 <ledstrip_ring_shift_all+0x1c>
+ 3a2:	c0 e0       	ldi	r28, 0x00	; 0
+ 3a4:	81 2f       	mov	r24, r17
+ 3a6:	0e 94 27 01 	call	0x24e	; 0x24e <_ringshift_all_once>
+ 3aa:	cf 5f       	subi	r28, 0xFF	; 255
+ 3ac:	dc 13       	cpse	r29, r28
+ 3ae:	fa cf       	rjmp	.-12     	; 0x3a4 <ledstrip_ring_shift_all+0x10>
+	_writeLEDs();
+ 3b0:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <_writeLEDs>
+}
+ 3b4:	df 91       	pop	r29
+ 3b6:	cf 91       	pop	r28
+ 3b8:	1f 91       	pop	r17
+ 3ba:	08 95       	ret
+
+000003bc <main>:
+	uint8_t i = 0;
+	//uint8_t toggle = 0;
+	uint8_t brightness_level = 255;
+	bool toggle = true;
+		
+	hal_SPI_enableModule();
+ 3bc:	0e 94 54 00 	call	0xa8	; 0xa8 <hal_SPI_enableModule>
+	hal_SPI_dissableInterrupt();
+ 3c0:	0e 94 ac 00 	call	0x158	; 0x158 <hal_SPI_dissableInterrupt>
+	// mode must set before enabling transmission!
+	hal_SPI_setMode(MASTER);
+ 3c4:	81 e0       	ldi	r24, 0x01	; 1
+ 3c6:	0e 94 69 00 	call	0xd2	; 0xd2 <hal_SPI_setMode>
+	hal_SPI_setClockRate(clk_CLK_DIV_8);
+ 3ca:	85 e0       	ldi	r24, 0x05	; 5
+ 3cc:	0e 94 98 00 	call	0x130	; 0x130 <hal_SPI_setClockRate>
+	hal_SPI_dataDirectionOrder(MSB_FIRST);
+ 3d0:	80 e0       	ldi	r24, 0x00	; 0
+ 3d2:	0e 94 5e 00 	call	0xbc	; 0xbc <hal_SPI_dataDirectionOrder>
+	hal_SPI_setClockPolarity(NONINVERTED);
+ 3d6:	80 e0       	ldi	r24, 0x00	; 0
+ 3d8:	0e 94 82 00 	call	0x104	; 0x104 <hal_SPI_setClockPolarity>
+	hal_SPI_setClockPhase(SAMPLE_ON_RISING_EDGE);
+ 3dc:	80 e0       	ldi	r24, 0x00	; 0
+ 3de:	0e 94 8d 00 	call	0x11a	; 0x11a <hal_SPI_setClockPhase>
+	hal_SPI_enable_TRX();
+ 3e2:	0e 94 5a 00 	call	0xb4	; 0xb4 <hal_SPI_enable_TRX>
+	
+	ledstrip_init(hal_SPI_trx);
+ 3e6:	86 ea       	ldi	r24, 0xA6	; 166
+ 3e8:	90 e0       	ldi	r25, 0x00	; 0
+ 3ea:	0e 94 69 01 	call	0x2d2	; 0x2d2 <ledstrip_init>
+	
+	ledstrip_set_rgb_all(0,0,0,0);
+ 3ee:	20 e0       	ldi	r18, 0x00	; 0
+ 3f0:	40 e0       	ldi	r20, 0x00	; 0
+ 3f2:	60 e0       	ldi	r22, 0x00	; 0
+ 3f4:	80 e0       	ldi	r24, 0x00	; 0
+ 3f6:	0e 94 af 01 	call	0x35e	; 0x35e <ledstrip_set_rgb_all>
+	
+	
+	
+	ledstip_pending_set_LED_color(0,red);
+ 3fa:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 3fe:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 402:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 406:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 40a:	80 e0       	ldi	r24, 0x00	; 0
+ 40c:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(1,red);
+ 410:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 414:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 418:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 41c:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 420:	81 e0       	ldi	r24, 0x01	; 1
+ 422:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(2,red);
+ 426:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 42a:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 42e:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 432:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 436:	82 e0       	ldi	r24, 0x02	; 2
+ 438:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(3,red);
+ 43c:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 440:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 444:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 448:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 44c:	83 e0       	ldi	r24, 0x03	; 3
+ 44e:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+	ledstip_pending_set_LED_color(10,blue);
+ 452:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 456:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 45a:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 45e:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 462:	8a e0       	ldi	r24, 0x0A	; 10
+ 464:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(11,blue);
+ 468:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 46c:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 470:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 474:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 478:	8b e0       	ldi	r24, 0x0B	; 11
+ 47a:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(12,blue);
+ 47e:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 482:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 486:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 48a:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 48e:	8c e0       	ldi	r24, 0x0C	; 12
+ 490:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(13,blue);
+ 494:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 498:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 49c:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 4a0:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 4a4:	8d e0       	ldi	r24, 0x0D	; 13
+ 4a6:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+	ledstip_pending_set_LED_color(20,green);
+ 4aa:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 4ae:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 4b2:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 4b6:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 4ba:	84 e1       	ldi	r24, 0x14	; 20
+ 4bc:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(21,green);
+ 4c0:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 4c4:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 4c8:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 4cc:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 4d0:	85 e1       	ldi	r24, 0x15	; 21
+ 4d2:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(22,green);
+ 4d6:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 4da:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 4de:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 4e2:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 4e6:	86 e1       	ldi	r24, 0x16	; 22
+ 4e8:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_color(23,green);
+ 4ec:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 4f0:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 4f4:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 4f8:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 4fc:	87 e1       	ldi	r24, 0x17	; 23
+ 4fe:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	ledstip_pending_set_LED_rgb(10,brightness_level,0,255,0);
+	ledstip_pending_set_LED_rgb(11,brightness_level,0,255,0);
+	ledstip_pending_set_LED_rgb(12,brightness_level,0,255,0);
+	ledstip_pending_set_LED_rgb(13,brightness_level,0,0,255);
+	*/
+	ledstrip_update_all();
+ 502:	0e 94 c7 01 	call	0x38e	; 0x38e <ledstrip_update_all>
+int main(void)
+{
+	uint8_t i = 0;
+	//uint8_t toggle = 0;
+	uint8_t brightness_level = 255;
+	bool toggle = true;
+ 506:	d1 e0       	ldi	r29, 0x01	; 1
+#define Laufliechtli
+
+#ifdef Laufliechtli
+int main(void)
+{
+	uint8_t i = 0;
+ 508:	c0 e0       	ldi	r28, 0x00	; 0
+		
+		//ledstrip_shift_all(true,1);
+		
+		
+		
+		if(toggle)
+ 50a:	dd 23       	and	r29, r29
+ 50c:	09 f4       	brne	.+2      	; 0x510 <__LOCK_REGION_LENGTH__+0x110>
+ 50e:	91 c0       	rjmp	.+290    	; 0x632 <__LOCK_REGION_LENGTH__+0x232>
+		{
+			ledstrip_ring_shift_all(true,1);
+ 510:	61 e0       	ldi	r22, 0x01	; 1
+ 512:	81 e0       	ldi	r24, 0x01	; 1
+ 514:	0e 94 ca 01 	call	0x394	; 0x394 <ledstrip_ring_shift_all>
+			i++;
+ 518:	cf 5f       	subi	r28, 0xFF	; 255
+			if(i == 225){
+ 51a:	c1 3e       	cpi	r28, 0xE1	; 225
+ 51c:	09 f0       	breq	.+2      	; 0x520 <__LOCK_REGION_LENGTH__+0x120>
+ 51e:	19 c1       	rjmp	.+562    	; 0x752 <__LOCK_REGION_LENGTH__+0x352>
+				i = 0;
+				ledstip_pending_set_LED_color(0,red);
+ 520:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 524:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 528:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 52c:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 530:	80 e0       	ldi	r24, 0x00	; 0
+ 532:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(1,red);
+ 536:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 53a:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 53e:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 542:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 546:	81 e0       	ldi	r24, 0x01	; 1
+ 548:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(2,red);
+ 54c:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 550:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 554:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 558:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 55c:	82 e0       	ldi	r24, 0x02	; 2
+ 55e:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(3,red);
+ 562:	40 91 16 01 	lds	r20, 0x0116	; 0x800116 <red>
+ 566:	50 91 17 01 	lds	r21, 0x0117	; 0x800117 <red+0x1>
+ 56a:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <red+0x2>
+ 56e:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <red+0x3>
+ 572:	83 e0       	ldi	r24, 0x03	; 3
+ 574:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+				ledstip_pending_set_LED_color(10,blue);
+ 578:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 57c:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 580:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 584:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 588:	8a e0       	ldi	r24, 0x0A	; 10
+ 58a:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(11,blue);
+ 58e:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 592:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 596:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 59a:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 59e:	8b e0       	ldi	r24, 0x0B	; 11
+ 5a0:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(12,blue);
+ 5a4:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 5a8:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 5ac:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 5b0:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 5b4:	8c e0       	ldi	r24, 0x0C	; 12
+ 5b6:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(13,blue);
+ 5ba:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <blue>
+ 5be:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <blue+0x1>
+ 5c2:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <blue+0x2>
+ 5c6:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <blue+0x3>
+ 5ca:	8d e0       	ldi	r24, 0x0D	; 13
+ 5cc:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+				ledstip_pending_set_LED_color(20,green);
+ 5d0:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 5d4:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 5d8:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 5dc:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 5e0:	84 e1       	ldi	r24, 0x14	; 20
+ 5e2:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(21,green);
+ 5e6:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 5ea:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 5ee:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 5f2:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 5f6:	85 e1       	ldi	r24, 0x15	; 21
+ 5f8:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(22,green);
+ 5fc:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 600:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 604:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 608:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 60c:	86 e1       	ldi	r24, 0x16	; 22
+ 60e:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(23,green);
+ 612:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <green>
+ 616:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <green+0x1>
+ 61a:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <green+0x2>
+ 61e:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <green+0x3>
+ 622:	87 e1       	ldi	r24, 0x17	; 23
+ 624:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstrip_update_all();
+ 628:	0e 94 c7 01 	call	0x38e	; 0x38e <ledstrip_update_all>
+				toggle = false;
+ 62c:	d0 e0       	ldi	r29, 0x00	; 0
+		if(toggle)
+		{
+			ledstrip_ring_shift_all(true,1);
+			i++;
+			if(i == 225){
+				i = 0;
+ 62e:	c0 e0       	ldi	r28, 0x00	; 0
+ 630:	90 c0       	rjmp	.+288    	; 0x752 <__LOCK_REGION_LENGTH__+0x352>
+				ledstip_pending_set_LED_color(23,green);
+				ledstrip_update_all();
+				toggle = false;
+			}
+		} else{
+			ledstrip_ring_shift_all(false,1);
+ 632:	61 e0       	ldi	r22, 0x01	; 1
+ 634:	80 e0       	ldi	r24, 0x00	; 0
+ 636:	0e 94 ca 01 	call	0x394	; 0x394 <ledstrip_ring_shift_all>
+			i++;
+ 63a:	cf 5f       	subi	r28, 0xFF	; 255
+			if(i == 225){
+ 63c:	c1 3e       	cpi	r28, 0xE1	; 225
+ 63e:	09 f0       	breq	.+2      	; 0x642 <__LOCK_REGION_LENGTH__+0x242>
+ 640:	88 c0       	rjmp	.+272    	; 0x752 <__LOCK_REGION_LENGTH__+0x352>
+				i = 0;
+				ledstip_pending_set_LED_color(0,A);
+ 642:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <A>
+ 646:	50 91 0b 01 	lds	r21, 0x010B	; 0x80010b <A+0x1>
+ 64a:	60 91 0c 01 	lds	r22, 0x010C	; 0x80010c <A+0x2>
+ 64e:	70 91 0d 01 	lds	r23, 0x010D	; 0x80010d <A+0x3>
+ 652:	80 e0       	ldi	r24, 0x00	; 0
+ 654:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(1,A);
+ 658:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <A>
+ 65c:	50 91 0b 01 	lds	r21, 0x010B	; 0x80010b <A+0x1>
+ 660:	60 91 0c 01 	lds	r22, 0x010C	; 0x80010c <A+0x2>
+ 664:	70 91 0d 01 	lds	r23, 0x010D	; 0x80010d <A+0x3>
+ 668:	81 e0       	ldi	r24, 0x01	; 1
+ 66a:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(2,A);
+ 66e:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <A>
+ 672:	50 91 0b 01 	lds	r21, 0x010B	; 0x80010b <A+0x1>
+ 676:	60 91 0c 01 	lds	r22, 0x010C	; 0x80010c <A+0x2>
+ 67a:	70 91 0d 01 	lds	r23, 0x010D	; 0x80010d <A+0x3>
+ 67e:	82 e0       	ldi	r24, 0x02	; 2
+ 680:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(3,A);
+ 684:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <A>
+ 688:	50 91 0b 01 	lds	r21, 0x010B	; 0x80010b <A+0x1>
+ 68c:	60 91 0c 01 	lds	r22, 0x010C	; 0x80010c <A+0x2>
+ 690:	70 91 0d 01 	lds	r23, 0x010D	; 0x80010d <A+0x3>
+ 694:	83 e0       	ldi	r24, 0x03	; 3
+ 696:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+				ledstip_pending_set_LED_color(10,B);
+ 69a:	40 91 06 01 	lds	r20, 0x0106	; 0x800106 <B>
+ 69e:	50 91 07 01 	lds	r21, 0x0107	; 0x800107 <B+0x1>
+ 6a2:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <B+0x2>
+ 6a6:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <B+0x3>
+ 6aa:	8a e0       	ldi	r24, 0x0A	; 10
+ 6ac:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(11,B);
+ 6b0:	40 91 06 01 	lds	r20, 0x0106	; 0x800106 <B>
+ 6b4:	50 91 07 01 	lds	r21, 0x0107	; 0x800107 <B+0x1>
+ 6b8:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <B+0x2>
+ 6bc:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <B+0x3>
+ 6c0:	8b e0       	ldi	r24, 0x0B	; 11
+ 6c2:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(12,B);
+ 6c6:	40 91 06 01 	lds	r20, 0x0106	; 0x800106 <B>
+ 6ca:	50 91 07 01 	lds	r21, 0x0107	; 0x800107 <B+0x1>
+ 6ce:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <B+0x2>
+ 6d2:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <B+0x3>
+ 6d6:	8c e0       	ldi	r24, 0x0C	; 12
+ 6d8:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(13,B);
+ 6dc:	40 91 06 01 	lds	r20, 0x0106	; 0x800106 <B>
+ 6e0:	50 91 07 01 	lds	r21, 0x0107	; 0x800107 <B+0x1>
+ 6e4:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <B+0x2>
+ 6e8:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <B+0x3>
+ 6ec:	8d e0       	ldi	r24, 0x0D	; 13
+ 6ee:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+	
+				ledstip_pending_set_LED_color(20,C);
+ 6f2:	40 91 02 01 	lds	r20, 0x0102	; 0x800102 <C>
+ 6f6:	50 91 03 01 	lds	r21, 0x0103	; 0x800103 <C+0x1>
+ 6fa:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <C+0x2>
+ 6fe:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <C+0x3>
+ 702:	84 e1       	ldi	r24, 0x14	; 20
+ 704:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(21,C);
+ 708:	40 91 02 01 	lds	r20, 0x0102	; 0x800102 <C>
+ 70c:	50 91 03 01 	lds	r21, 0x0103	; 0x800103 <C+0x1>
+ 710:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <C+0x2>
+ 714:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <C+0x3>
+ 718:	85 e1       	ldi	r24, 0x15	; 21
+ 71a:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(22,C);
+ 71e:	40 91 02 01 	lds	r20, 0x0102	; 0x800102 <C>
+ 722:	50 91 03 01 	lds	r21, 0x0103	; 0x800103 <C+0x1>
+ 726:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <C+0x2>
+ 72a:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <C+0x3>
+ 72e:	86 e1       	ldi	r24, 0x16	; 22
+ 730:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstip_pending_set_LED_color(23,C);
+ 734:	40 91 02 01 	lds	r20, 0x0102	; 0x800102 <C>
+ 738:	50 91 03 01 	lds	r21, 0x0103	; 0x800103 <C+0x1>
+ 73c:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <C+0x2>
+ 740:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <C+0x3>
+ 744:	87 e1       	ldi	r24, 0x17	; 23
+ 746:	0e 94 b7 01 	call	0x36e	; 0x36e <ledstip_pending_set_LED_color>
+				ledstrip_update_all();
+ 74a:	0e 94 c7 01 	call	0x38e	; 0x38e <ledstrip_update_all>
+				toggle = true;
+ 74e:	d1 e0       	ldi	r29, 0x01	; 1
+			}
+		} else{
+			ledstrip_ring_shift_all(false,1);
+			i++;
+			if(i == 225){
+				i = 0;
+ 750:	c0 e0       	ldi	r28, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 752:	2f ef       	ldi	r18, 0xFF	; 255
+ 754:	89 ef       	ldi	r24, 0xF9	; 249
+ 756:	90 e0       	ldi	r25, 0x00	; 0
+ 758:	21 50       	subi	r18, 0x01	; 1
+ 75a:	80 40       	sbci	r24, 0x00	; 0
+ 75c:	90 40       	sbci	r25, 0x00	; 0
+ 75e:	e1 f7       	brne	.-8      	; 0x758 <__LOCK_REGION_LENGTH__+0x358>
+ 760:	00 c0       	rjmp	.+0      	; 0x762 <__LOCK_REGION_LENGTH__+0x362>
+ 762:	00 00       	nop
+ 764:	d2 ce       	rjmp	.-604    	; 0x50a <__LOCK_REGION_LENGTH__+0x10a>
+
+00000766 <_exit>:
+ 766:	f8 94       	cli
+
+00000768 <__stop_program>:
+ 768:	ff cf       	rjmp	.-2      	; 0x768 <__stop_program>
