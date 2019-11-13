@@ -1,6 +1,6 @@
 /**
  ****************************************************************
- @file   ledstrip.c
+ @file   sk9822.c
  ****************************************************************
  @brief  driver for the SK9822 LED-Strip
  ****************************************************************
@@ -140,7 +140,7 @@ void _ringshift_all_once(bool dir)
  @return -
  ****************************************************************
  */
-void ledstrip_init(fptr_U8_t spi_transmit)
+void sk9822_init(fptr_U8_t spi_transmit)
 {
 	spi_tx = spi_transmit;
 }
@@ -154,7 +154,7 @@ void ledstrip_init(fptr_U8_t spi_transmit)
  @return -
  ****************************************************************
  */
-void ledstrip_set_LED_color(uint8_t n_led,led_color_t color)
+void sk9822_set_LED_color(uint8_t n_led,led_color_t color)
 {
 	if(n_led > N_LED) return;
 	color.brightness |= 0xE0;
@@ -173,7 +173,7 @@ void ledstrip_set_LED_color(uint8_t n_led,led_color_t color)
  @return -
  ****************************************************************
  */
-void ledstrip_set_LED_rgb(uint8_t n_led,uint8_t level, uint8_t r, uint8_t g, uint8_t b)
+void sk9822_set_LED_rgb(uint8_t n_led,uint8_t level, uint8_t r, uint8_t g, uint8_t b)
 {
 	led_color_t color = {
 		.brightness = level | 0xE0,
@@ -192,7 +192,7 @@ void ledstrip_set_LED_rgb(uint8_t n_led,uint8_t level, uint8_t r, uint8_t g, uin
  @return -
  ****************************************************************
  */
-void ledstrip_set_color_all(led_color_t color)
+void sk9822_set_color_all(led_color_t color)
 {
 	uint8_t i = 0;
 	_start_sequence();
@@ -206,7 +206,7 @@ void ledstrip_set_color_all(led_color_t color)
 	_stop_sequence();
 }
 
-void ledstrip_set_rgb_all(uint8_t level, uint8_t r, uint8_t g, uint8_t b)
+void sk9822_set_rgb_all(uint8_t level, uint8_t r, uint8_t g, uint8_t b)
 {
 	led_color_t color = {
 		.brightness = level | 0xE0,
@@ -228,7 +228,7 @@ void ledstrip_set_rgb_all(uint8_t level, uint8_t r, uint8_t g, uint8_t b)
  @return -
  ****************************************************************
  */
-void ledstip_pending_set_LED_color(uint8_t led_n, led_color_t color)
+void sk9822_pending_set_LED_color(uint8_t led_n, led_color_t color)
 {
 	if(led_n > N_LED) return;
 	color.brightness |= 0xE0;
@@ -247,7 +247,7 @@ void ledstip_pending_set_LED_color(uint8_t led_n, led_color_t color)
  @return -
  ****************************************************************
  */
-void ledstip_pending_set_LED_rgb(uint8_t led_n, uint8_t level, uint8_t r, uint8_t g, uint8_t b)
+void sk9822_pending_set_LED_rgb(uint8_t led_n, uint8_t level, uint8_t r, uint8_t g, uint8_t b)
 {
 	if(led_n > N_LED) return;
 	led_strip_buff[led_n].brightness = level | 0xE0;
@@ -265,7 +265,7 @@ void ledstip_pending_set_LED_rgb(uint8_t led_n, uint8_t level, uint8_t r, uint8_
  @return -
  ****************************************************************
  */
-void ledstrip_update_all()
+void sk9822_update_all()
 {
 	_writeLEDs();
 }
@@ -280,7 +280,7 @@ void ledstrip_update_all()
  @return -
  ****************************************************************
  */
-void ledstrip_shift_all(bool dir,uint8_t n_position)
+void sk9822_shift_all(bool dir,uint8_t n_position)
 {
 	uint8_t i = 0;
 	for(i = 0; i<n_position;i++)_shift_all_once(dir);
@@ -297,7 +297,7 @@ void ledstrip_shift_all(bool dir,uint8_t n_position)
  @return -
  ****************************************************************
  */
-void ledstrip_ring_shift_all(bool dir,uint8_t n_position)
+void sk9822_ring_shift_all(bool dir,uint8_t n_position)
 {
 	uint8_t i = 0;
 	for(i = 0; i<n_position;i++)_ringshift_all_once(dir);

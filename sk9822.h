@@ -1,6 +1,6 @@
 /**
  ****************************************************************
- @file   ledstrip.h
+ @file   sk9822.h
  ****************************************************************
  @brief  driver for the SK9822 LED-Strip
  ****************************************************************
@@ -43,20 +43,20 @@ typedef struct{
 	uint8_t blue;
 }led_color_t;
 
-void ledstrip_init(fptr_U8_t spi_transmit);
+void sk9822_init(fptr_U8_t spi_transmit);
 
-void ledstrip_set_LED_color(uint8_t n_led,led_color_t color);
+void sk9822_set_LED_color(uint8_t n_led,led_color_t color);
 
-void ledstrip_set_LED_rgb(uint8_t n_led, uint8_t level, uint8_t r, uint8_t g, uint8_t b);
+void sk9822_set_LED_rgb(uint8_t n_led, uint8_t level, uint8_t r, uint8_t g, uint8_t b);
 
-void ledstrip_set_color_all(led_color_t color);
+void sk9822_set_color_all(led_color_t color);
 
-void ledstrip_set_rgb_all(uint8_t level, uint8_t r, uint8_t g, uint8_t b);
+void sk9822_set_rgb_all(uint8_t level, uint8_t r, uint8_t g, uint8_t b);
 
-void ledstip_pending_set_LED_color(uint8_t led_n, led_color_t color);
+void sk9822_pending_set_LED_color(uint8_t led_n, led_color_t color);
 
-void ledstrip_update_all();
+void sk9822_update_all();
 
-void ledstrip_ring_shift_all(bool dir,uint8_t n_position);
+void sk9822_ring_shift_all(bool dir,uint8_t n_position);
 
 #endif // 
