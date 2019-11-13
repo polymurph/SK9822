@@ -8,7 +8,7 @@
  @version 1.0
  @date    2019-10-22
  ******************************************************************/
-#include "ledstripe.h"
+#include "sk9822.h"
 #include <stdint.h>
 #include <stdbool.h>
 
